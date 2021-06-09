@@ -1,6 +1,10 @@
 package com.dsilvera.kotlinarchitecture.common
 
+import com.dsilvera.kotlinarchitecture.data.api.LocalApi
+import com.dsilvera.kotlinarchitecture.data.api.LocalApiImpl
 import com.dsilvera.kotlinarchitecture.data.api.RemoteApi
+import com.dsilvera.kotlinarchitecture.data.database.createDatabase
+import com.dsilvera.kotlinarchitecture.data.database.createProductDao
 import createApiClient
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -24,5 +28,8 @@ val repositoryModule: Module = module {
 }
 
 val dataModule: Module = module {
-    single { createApiClient().create(RemoteApi::class.java) }
+    single { createApiClient().create(RemoteApi::class.java)}
+    single<LocalApi> { LocalApiImpl(appContext = get()) }
+    single { createDatabase(appContext = get()) }
+    single { createProductDao(database = get()) }
 }
