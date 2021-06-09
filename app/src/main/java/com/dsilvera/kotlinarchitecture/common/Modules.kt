@@ -1,5 +1,7 @@
 package com.dsilvera.kotlinarchitecture.common
 
+import com.dsilvera.kotlinarchitecture.data.api.RemoteApi
+import createApiClient
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
@@ -22,4 +24,5 @@ val repositoryModule: Module = module {
 }
 
 val dataModule: Module = module {
+    single { createApiClient().create(RemoteApi::class.java) }
 }
