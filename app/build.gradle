@@ -1,0 +1,88 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.dsilvera.kotlinarchitecture"
+        minSdkVersion 28
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "String", 'BASE_URL', "\"https://fr.openfoodfacts.org/api/v0/\""
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", 'BASE_URL', "\"https://fr.openfoodfacts.org/api/v0/\""
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+/* Android */
+    implementation "androidx.annotation:annotation:${versions.annotation}"
+    implementation "androidx.appcompat:appcompat:${versions.appcompat}"
+    implementation "androidx.constraintlayout:constraintlayout:${versions.constraint}"
+    implementation "androidx.exifinterface:exifinterface:1.3.2"
+    implementation "androidx.fragment:fragment-ktx:${versions.fragmentKotlin}"
+    implementation "androidx.legacy:legacy-support-v4:${versions.legacy}"
+    implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycleExtensions}"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${versions.ktx}"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:${versions.ktx}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.ktx}"
+    implementation "androidx.recyclerview:recyclerview:${versions.recyclerView}"
+    implementation "com.google.android.material:material:${versions.material}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:${versions.kotlin}"
+
+    /* Navigation */
+    implementation "androidx.navigation:navigation-fragment-ktx:${versions.navigation}"
+    implementation "androidx.navigation:navigation-ui-ktx:${versions.navigation}"
+
+    /* Glide */
+    implementation "com.github.bumptech.glide:glide:${versions.glide}"
+    annotationProcessor "com.github.bumptech.glide:compiler:${versions.glide}"
+
+    /* Koin */
+    implementation "org.koin:koin-android:${versions.koin}"
+    implementation "org.koin:koin-androidx-viewmodel:${versions.koin}"
+
+    /* Retrofit */
+    implementation "com.squareup.okhttp3:logging-interceptor:${versions.loggingInterceptor}"
+    implementation "com.squareup.retrofit2:converter-moshi:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+
+    /* ZXing */
+    implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
+
+    /* Room */
+    implementation("androidx.room:room-runtime:${versions.room}")
+    implementation("androidx.room:room-ktx:${versions.room}")
+    annotationProcessor "androidx.room:room-compiler:${versions.room}"
+    kapt("androidx.room:room-compiler:${versions.room}")
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
