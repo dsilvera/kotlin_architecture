@@ -5,6 +5,12 @@ import com.dsilvera.kotlinarchitecture.data.api.LocalApiImpl
 import com.dsilvera.kotlinarchitecture.data.api.RemoteApi
 import com.dsilvera.kotlinarchitecture.data.database.createDatabase
 import com.dsilvera.kotlinarchitecture.data.database.createProductDao
+import com.dsilvera.kotlinarchitecture.data.repository.ProductRepositoryImpl
+import com.dsilvera.kotlinarchitecture.data.repository.UserRepositoryImpl
+import com.dsilvera.kotlinarchitecture.domain.repository.ProductRepository
+import com.dsilvera.kotlinarchitecture.domain.repository.UserRepository
+import com.dsilvera.kotlinarchitecture.domain.usecase.ProductUseCase
+import com.dsilvera.kotlinarchitecture.domain.usecase.UserUseCase
 import createApiClient
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -22,14 +28,17 @@ val viewModelModule: Module = module {
 }
 
 val useCaseModule: Module = module {
+    single { ProductUseCase(productRepository = get(), userRepository = get()) }
+    single { UserUseCase(userRepository = get()) }
 }
 
 val repositoryModule: Module = module {
+    single { ProductRepositoryImpl(remoteApi=get(), productDao=get()) as ProductRepository }
+    single { UserRepositoryImpl(localApi= get()) as UserRepository }
 }
 
 val dataModule: Module = module {
     single { createApiClient().create(RemoteApi::class.java)}
     single<LocalApi> { LocalApiImpl(appContext = get()) }
-    single { createDatabase(appContext = get()) }
     single { createProductDao(database = get()) }
 }

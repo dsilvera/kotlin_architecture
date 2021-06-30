@@ -1,12 +1,18 @@
 package com.dsilvera.kotlinarchitecture.data.model
 
 import androidx.annotation.Keep
+import com.dsilvera.kotlinarchitecture.domain.entity.ProductResult
 import com.squareup.moshi.Json
 
 @Keep
 data class ProductResultResponse(
     @field:Json(name = "status")
-    val status:Int,
+    val status: Int,
     @field:Json(name = "product")
     val product: ProductResponse?,
-)
+) {
+    fun toModel() = ProductResult(
+        status = status,
+        product = product?.toModel()
+    )
+}

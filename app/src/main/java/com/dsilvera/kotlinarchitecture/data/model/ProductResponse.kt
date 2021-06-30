@@ -4,6 +4,7 @@ import androidx.annotation.Keep
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.dsilvera.kotlinarchitecture.domain.entity.Product
 import com.squareup.moshi.Json
 
 @Keep
@@ -42,4 +43,18 @@ data class ProductResponse(
     @ColumnInfo(name = "ecoscore_grade")
     @field:Json(name = "ecoscore_grade")
     val ecoscoreGrade: String
-)
+) {
+    fun toModel() = Product(
+        id = id,
+        ingredientsText = ingredientsText,
+        imageUrl = imageUrl,
+        code = code,
+        brand = brand,
+        genericName = genericName,
+        labels = labels,
+        nutriscoreScore = nutriscoreScore,
+        nutriscoreGrade = nutriscoreGrade,
+        ecoscoreScore = ecoscoreScore,
+        ecoscoreGrade = ecoscoreGrade,
+    )
+}
