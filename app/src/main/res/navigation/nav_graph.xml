@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.dsilvera.kotlinarchitecture.presentation.home.fragment.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_scan"
+            app:destination="@id/scanFragment" />
+
+        <action
+            android:id="@+id/action_home_to_history"
+            app:destination="@id/historyFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/scanFragment"
+        android:name="com.dsilvera.kotlinarchitecture.presentation.scan.fragment.ScanFragment"
+        android:label="ScanFragment"
+        tools:layout="@layout/fragment_scan">
+        <action
+            android:id="@+id/action_scan_to_product"
+            app:popUpTo="@id/homeFragment"
+            app:destination="@id/productFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.dsilvera.kotlinarchitecture.presentation.history.fragment.HistoryFragment"
+        android:label="HistoryFragment"
+        tools:layout="@layout/fragment_history">
+
+        <action
+            android:id="@+id/action_history_to_product"
+            app:destination="@id/productFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.dsilvera.kotlinarchitecture.presentation.product.fragment.ProductFragment"
+        android:label="ProductFragment"
+        tools:layout="@layout/fragment_product">
+
+        <argument
+            android:name="product"
+            app:argType="com.dsilvera.kotlinarchitecture.domain.entity.Product"
+            app:nullable="false" />
+
+    </fragment>
+
+</navigation>

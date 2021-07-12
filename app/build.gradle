@@ -62,6 +62,7 @@ dependencies {
 
     /* Glide */
     implementation "com.github.bumptech.glide:glide:${versions.glide}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     annotationProcessor "com.github.bumptech.glide:compiler:${versions.glide}"
 
     /* Koin */
