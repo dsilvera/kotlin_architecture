@@ -11,7 +11,11 @@ import com.dsilvera.kotlinarchitecture.domain.repository.ProductRepository
 import com.dsilvera.kotlinarchitecture.domain.repository.UserRepository
 import com.dsilvera.kotlinarchitecture.domain.usecase.ProductUseCase
 import com.dsilvera.kotlinarchitecture.domain.usecase.UserUseCase
+import com.dsilvera.kotlinarchitecture.presentation.history.viewmodel.HistoryViewModel
+import com.dsilvera.kotlinarchitecture.presentation.home.viewmodel.HomeViewModel
+import com.dsilvera.kotlinarchitecture.presentation.product.viewmodel.ScanViewModel
 import createApiClient
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
@@ -25,6 +29,9 @@ val appModules by lazy {
 }
 
 val viewModelModule: Module = module {
+    viewModel { ScanViewModel(get()) }
+    viewModel { HomeViewModel(get()) }
+    viewModel { HistoryViewModel(get()) }
 }
 
 val useCaseModule: Module = module {
